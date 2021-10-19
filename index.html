@@ -20,28 +20,32 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-light text-center">
+    <nav class="navbar bg-info text-center">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Weather Forecast Dashboard</span>
       </div>
     </nav>
-    <!-- <header class="header">
-      <h1 class="header-text">Weather Forecast Dashboard</h1>
-    </header> -->
 
-    <main class="page-container">
-      <div class="search-bar container">
-        <p>Search for a city:</p>
-        <form class="form-text">Enter city here</form>
-        <button class="searchBtn">Submit</button>
-        <div></div>
+    <main class="row">
+      <div class="search-bar col-4">
+        <p class="heading-text">Search for a city:</p>
+        <form class="form-inline active-cyan-4">
+          <input
+            class="form-control form-control-sm mr-3 w-75"
+            type="text"
+            placeholder="Enter city here"
+            aria-label="Search"
+          />
+          <button class="searchBtn">Search</button>
+        </form>
       </div>
 
-      <div class="current-weather container">
-        <div></div>
+      <div class="current-weather col-7">
+        <div class="current-day">City : Date</div>
       </div>
 
       <div class="5-day container">
+        <h3>Following 5 days</h3>
         <div></div>
       </div>
     </main>
