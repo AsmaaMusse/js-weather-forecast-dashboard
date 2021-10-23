@@ -53,16 +53,27 @@
         </ul>
       </div>
 
-      <!--Current-day card-->
-      <div class="row">
-        <div class="current-weather col-md-7">
-          <div class="current-day">City : Date</div>
+      <div class="col-12 col-md-9 bg-white border p-2 mb-3">
+        <div class="d-flex flex-column">
+          <!-- Current-day Card -->
+          <div class="bg-white border mb-2">
+            <h2 class="card-title">
+              Birmingham (10/10/2021)
+              <img src="http://openweathermap.org/img/w/04n.png" />
+            </h2>
+            <p class="card-text">Temp: 62.96 &deg;F</p>
+            <p class="card-text">Wind: 14.97 MPH</p>
+            <p class="card-text">Humidity: 88%</p>
+            <p class="card-text">
+              UV index: <span class="btn btn-primary">0.47</span>
+            </p>
+          </div>
         </div>
+      </div>
 
-        <!-- 5 days cards-->
-        <div class="following-days-container col-md-7 offset-md-7">
-          <h3 class="following-days">Following 5 days</h3>
-        </div>
+      <!-- 5 days cards-->
+      <div class="following-days-container col-md-7 offset-md-7">
+        <h3 class="following-days">Following 5 days</h3>
       </div>
     </main>
 
