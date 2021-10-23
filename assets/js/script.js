@@ -51,8 +51,6 @@ const weatherCardsContainer = $("#weather-cards-container");
 
 // Construct a function to get weather cards
 const renderCurrentWeatherCard = function (currentData) {
-  console.log(currentData);
-
   // Get the current weather card from HTML
   const currentWeatherCard = `<div class="card-body bg-white border mb-2">
     <h2 class="card-title">
@@ -71,11 +69,42 @@ const renderCurrentWeatherCard = function (currentData) {
   weatherCardsContainer.append(currentWeatherCard);
 };
 
+// Construct forecast cards
+const renderForecastWeatherCards = function (forecastData) {
+  const constructForecastCard = function (each) {
+    return `<div class="card m-1 forecast-card">
+        <div class="card-body">
+        <h5 class="card-title">${each.date}</h5>
+        <p class="card-text">
+            <img src="https://openweathermap.org/img/w/${each.iconCode}.png" />
+        </p>
+        <p class="card-text">Temp: ${each.temperature}&deg;F</p>
+        <p class="card-text">Wind: ${each.wind} MPH</p>
+        <p class="card-text">Humidity: ${each.humidity}</p>
+        </div>
+    </div>`;
+  };
+
+  const forecastCards = forecastData.map(constructForecastCard).join("");
+
+  const forecastCardsContainer = `<div class="forecast border">
+    <h3 class="p-3 text-center">5-Day Forecast:</h3>
+    <div
+        class="m-3 d-flex flex-wrap justify-content-around"
+        id=""
+    >${forecastCards}</div>
+    </div>`;
+
+  weatherCardsContainer.append(forecastCardsContainer);
+};
+
 // Create weather cards
 const renderWeatherCards = function (weatherData) {
   //console.log(weatherData);
 
   renderCurrentWeatherCard(weatherData.current);
+
+  renderForecastWeatherCards(weatherData.forecast);
 };
 
 renderWeatherCards(mockData);
