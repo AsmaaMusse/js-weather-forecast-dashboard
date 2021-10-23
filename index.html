@@ -19,6 +19,7 @@
     <title>Weather Forecast Dashboard</title>
   </head>
 
+  <!-- Nav bar heading-->
   <body>
     <nav class="navbar bg-info text-center">
       <div class="container-fluid">
@@ -26,27 +27,42 @@
       </div>
     </nav>
 
-    <main class="row">
-      <div class="search-bar col-4">
-        <p class="heading-text">Search for a city:</p>
+    <!--Search bar-->
+    <main class="row gx-0 p-3">
+      <div class="search-bar col-md-4">
+        <h2 class="heading-text">Search for a city:</h2>
         <form class="form-inline active-cyan-4">
           <input
             class="form-control form-control-sm mr-3 w-75"
-            type="text"
+            type="search"
             placeholder="Enter city here"
             aria-label="Search"
           />
-          <button class="searchBtn">Search</button>
+          <button class="searchBtn" id="search-button">Search</button>
         </form>
+
+        <hr />
+
+        <!-- Search history-->
+        <ul class="col-12 list-group" id="city-list">
+          <li class="list-group-item">Birmingham</li>
+          <li class="list-group-item">Istanbul</li>
+          <li class="list-group-item">Cairo</li>
+          <li class="list-group-item">New York</li>
+          <li class="list-group-item">kuwait</li>
+        </ul>
       </div>
 
-      <div class="current-weather col-7">
-        <div class="current-day">City : Date</div>
-      </div>
+      <!--Current-day card-->
+      <div class="row">
+        <div class="current-weather col-md-7">
+          <div class="current-day">City : Date</div>
+        </div>
 
-      <div class="5-day container">
-        <h3>Following 5 days</h3>
-        <div></div>
+        <!-- 5 days cards-->
+        <div class="following-days-container col-md-7 offset-md-7">
+          <h3 class="following-days">Following 5 days</h3>
+        </div>
       </div>
     </main>
 
