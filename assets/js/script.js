@@ -45,10 +45,26 @@ const getWeatherData = async (cityName) => {
 
   const forecastDataResponse = await fetch(forecastDataUrl);
   const forecastData = await forecastDataResponse.json();
+
+  const current = getCurrentData(name, forecastData);
+  const forecast = getForecastData(forecastData);
+
   return {
     current: current,
     forecast: forecast,
   };
+};
+
+const getUVIClassName = function (uvi) {
+  if (uvi >= 0 && uvi < 3) {
+    return "btn-success";
+  } else if (uvi >= 3 && uvi < 6) {
+    return "btn-warning";
+  } else if (uvi >= 6 && uvi < 8) {
+    return "btn-danger";
+  } else {
+    return "btn-dark";
+  }
 };
 
 const setCitiesInLS = function (cityName) {
