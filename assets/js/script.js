@@ -1,75 +1,88 @@
-const mockData = {
-  current: {
-    name: "London",
-    temperature: 123.45,
-    wind: 111.22,
-    humidity: 33,
-    uvi: 2.5,
-    date: "(3/30/2021)",
-    iconCode: "04n",
-  },
-  forecast: [
-    {
-      date: "(3/30/2021)",
-      temperature: 123.45,
-      wind: 111.22,
-      humidity: 33,
-      iconCode: "04n",
-    },
-    {
-      date: "(3/30/2021)",
-      temperature: 123.45,
-      wind: 111.22,
-      humidity: 33,
-      iconCode: "04n",
-    },
-    {
-      date: "(3/30/2021)",
-      temperature: 123.45,
-      wind: 111.22,
-      humidity: 33,
-      iconCode: "04n",
-    },
-    {
-      date: "(3/30/2021)",
-      temperature: 123.45,
-      wind: 111.22,
-      humidity: 33,
-      iconCode: "04n",
-    },
-    {
-      date: "(3/30/2021)",
-      temperature: 123.45,
-      wind: 111.22,
-      humidity: 33,
-      iconCode: "04n",
-    },
-  ],
-};
-
 const weatherCardsContainer = $("#weather-cards-container");
 
-// Construct a function to get weather cards
+const APIKey = "4ee1c276e740e7b3f94cf049482fb10e";
+
+const getCurrentData = function (name, forecastData) {
+  return {
+    name: name,
+    temperature: forecastData.current.temp,
+    wind: forecastData.current.wind_speed,
+    humidity: forecastData.current.humidity,
+    uvi: forecastData.current.uvi,
+    date: getFormattedDate(forecastData.current.dt, "ddd DD/MM/YYYY HH:mm"),
+    iconCode: forecastData.current.weather[0].icon,
+  };
+};
+
+const getFormattedDate = function (unixTimestamp, format = "DD/MM/YYYY") {
+  return moment.unix(unixTimestamp).format(format);
+};
+
+const getForecastData = function (forecastData) {
+  const callback = function (each) {
+    return {
+      date: getFormattedDate(each.dt),
+      temperature: each.temp.max,
+      wind: each.wind_speed,
+      humidity: each.humidity,
+      iconCode: each.weather[0].icon,
+    };
+  };
+
+  return forecastData.daily.slice(1, 6).map(callback);
+};
+
+const getWeatherData = async (cityName) => {
+  const currentDataUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKey}`;
+  const currentDataResponse = await fetch(currentDataUrl);
+  const currentData = await currentDataResponse.json();
+
+  const lat = currentData.coord.lat;
+  const lon = currentData.coord.lon;
+  const name = currentData.name;
+
+  const forecastDataUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}&units=imperial`;
+
+  const forecastDataResponse = await fetch(forecastDataUrl);
+  const forecastData = await forecastDataResponse.json();
+  return {
+    current: current,
+    forecast: forecast,
+  };
+};
+
+const setCitiesInLS = function (cityName) {
+  // get cities from LS
+  const cities = JSON.parse(localStorage.getItem("recentCities")) ?? [];
+
+  // if city does not exist
+  if (!cities.includes(cityName)) {
+    // insert cityName in cities
+    cities.push(cityName);
+
+    // set cities in LS
+    localStorage.setItem("recentCities", JSON.stringify(cities));
+  }
+};
+
 const renderCurrentWeatherCard = function (currentData) {
-  // Get the current weather card from HTML
   const currentWeatherCard = `<div class="card-body bg-white border mb-2">
     <h2 class="card-title">
-       ${currentData.name} ${currentData.date}
-       <img src="https://openweathermap.org/img/w/${currentData.iconCode}.png" />
+        ${currentData.name} ${currentData.date}
+        <img src="https://openweathermap.org/img/w/${currentData.iconCode}.png" />
     </h2>
-    
     <p class="card-text">Temp: ${currentData.temperature}&deg;F</p>
     <p class="card-text">Wind: ${currentData.wind} MPH</p>
     <p class="card-text">Humidity: ${currentData.humidity}%</p>
     <p class="card-text">
         UV index: <span class="btn btn-primary">${currentData.uvi}</span>
     </p>
-  </div>`;
+    </div>`;
 
   weatherCardsContainer.append(currentWeatherCard);
 };
 
-// Construct forecast cards
+// constructing forecast cards
 const renderForecastWeatherCards = function (forecastData) {
   const constructForecastCard = function (each) {
     return `<div class="card m-1 forecast-card">
@@ -87,7 +100,7 @@ const renderForecastWeatherCards = function (forecastData) {
 
   const forecastCards = forecastData.map(constructForecastCard).join("");
 
-  const forecastCardsContainer = `<div class="forecast border">
+  const forecastCardsContainer = `<div class="bg-white border">
     <h3 class="p-3 text-center">5-Day Forecast:</h3>
     <div
         class="m-3 d-flex flex-wrap justify-content-around"
@@ -98,13 +111,79 @@ const renderForecastWeatherCards = function (forecastData) {
   weatherCardsContainer.append(forecastCardsContainer);
 };
 
-// Create weather cards
+// constructing weather cards
 const renderWeatherCards = function (weatherData) {
-  //console.log(weatherData);
-
   renderCurrentWeatherCard(weatherData.current);
 
   renderForecastWeatherCards(weatherData.forecast);
 };
 
-renderWeatherCards(mockData);
+const renderRecentCities = function () {
+  // get cities from LS
+  const cities = JSON.parse(localStorage.getItem("recentCities")) ?? [];
+
+  const citiesContainer = $("#city-list");
+
+  citiesContainer.empty();
+
+  const constructAndAppendCity = function (city) {
+    const liEl = `<li data-city=${city} class="list-group-item">${city}</li>`;
+    citiesContainer.append(liEl);
+  };
+
+  const handleClick = function (event) {
+    const target = $(event.target);
+
+    // if click is from li only
+    if (target.is("li")) {
+      // get city name
+      const cityName = target.data("city");
+
+      // render weather info with city name
+      renderWeatherInfo(cityName);
+    }
+  };
+
+  citiesContainer.on("click", handleClick);
+
+  cities.forEach(constructAndAppendCity);
+};
+
+const renderWeatherInfo = async function (cityName) {
+  const weatherData = await getWeatherData(cityName);
+
+  weatherCardsContainer.empty();
+
+  renderWeatherCards(weatherData);
+};
+
+const handleSearch = async function (event) {
+  event.preventDefault();
+
+  const cityName = $("#city-input").val();
+
+  if (cityName) {
+    renderWeatherInfo(cityName);
+
+    setCitiesInLS(cityName);
+
+    renderRecentCities();
+  }
+};
+
+const handleReady = function () {
+  // render recent cities
+  renderRecentCities();
+
+  // Get cities from LS
+  const cities = JSON.parse(localStorage.getItem("recentCities")) ?? [];
+
+  // if there are recent cities get the info for the most recent city
+  if (cities.length) {
+    const cityName = cities[cities.length - 1];
+    renderWeatherInfo(cityName);
+  }
+};
+
+$("#search-form").on("submit", handleSearch);
+$(document).ready(handleReady);

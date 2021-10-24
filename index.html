@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -19,48 +18,50 @@
     <title>Weather Forecast Dashboard</title>
   </head>
 
-  <!-- Nav bar heading-->
   <body>
-    <nav class="navbar bg-info">
+    <!--Nav bar heading-->
+    <div class="navbar bg-info text-center">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Weather Forecast Dashboard</span>
       </div>
-    </nav>
+    </div>  
 
-    <!--Search bar-->
-    <main class="row gx-0 p-3">
-      <div class="search-bar col-12 col-md-3 border p-2 mb-3">
-        <h2 class="heading-text">Search for a city:</h2>
-        <form class="form-inline active-cyan-4">
-          <input
-            class="form-control form-control-sm mr-3 w-75"
-            type="search"
-            placeholder="Enter city here"
-            aria-label="Search"
-          />
-          <button class="searchBtn" id="search-button">Search</button>
-        </form>
+    <main>
+      <div class="row gx-0 p-3">
+        <!-- Column for search history -->
+        <div class="search-bar col-12 col-md-3 border p-2 mb-3">
+          <h2>Search for a city:</h2>
+          <form class="form-inline active-cyan-4" id="search-form">
+            <input
+              class="form-control form-control-sm mr-3 w-75"
+              type="search"
+              placeholder="Enter city here"
+              aria-label="Search"
+            />
+            <button class="searchBtn" id="search-button">Search</button>
+    
+          </form>
 
-        <hr />
+          <hr />
 
-        <!-- Search history-->
-        <ul class="col-12 list-group" id="city-list">
-          <li class="list-group-item">Birmingham</li>
-          <li class="list-group-item">Istanbul</li>
-          <li class="list-group-item">Cairo</li>
-          <li class="list-group-item">New York</li>
-          <li class="list-group-item">kuwait</li>
-        </ul>
-      </div>
+          <!-- Search history-->
+          <ul class="col-12 list-group" id="city-list"></ul>
+        </div>
 
-      <!-- container for current weather cards -->
-      <div class="col-12 col-md-9 border p-2 mb-3">
-        <!-- container for forecast weather cards -->
-        <div class="d-flex flex-column" id="weather-cards-container"></div>
-      </div>
-      </div>
-    </main>
+          <!-- Column for cards -->
+          <div class="col-12 col-md-9 bg-white border p-2 mb-3">
+            <div class="d-flex flex-column" id="weather-cards-container"></div>
+          </div>
 
+        </div>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
