@@ -1,7 +1,9 @@
 const weatherCardsContainer = $("#weather-cards-container");
 
-const APIKey = "4ee1c276e740e7b3f94cf049482fb10e";
+// Personal API KEY
+const API_KEY = "4ee1c276e740e7b3f94cf049482fb10e";
 
+// Get current data from API
 const getCurrentData = function (name, forecastData) {
   return {
     name: name,
@@ -18,6 +20,7 @@ const getFormattedDate = function (unixTimestamp, format = "DD/MM/YYYY") {
   return moment.unix(unixTimestamp).format(format);
 };
 
+// Get forecast data from API
 const getForecastData = function (forecastData) {
   const callback = function (each) {
     return {
@@ -33,7 +36,7 @@ const getForecastData = function (forecastData) {
 };
 
 const getWeatherData = async (cityName) => {
-  const currentDataUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${APIKey}`;
+  const currentDataUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
   const currentDataResponse = await fetch(currentDataUrl);
   const currentData = await currentDataResponse.json();
 
@@ -41,7 +44,7 @@ const getWeatherData = async (cityName) => {
   const lon = currentData.coord.lon;
   const name = currentData.name;
 
-  const forecastDataUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${APIKey}&units=imperial`;
+  const forecastDataUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=imperial`;
 
   const forecastDataResponse = await fetch(forecastDataUrl);
   const forecastData = await forecastDataResponse.json();
@@ -85,13 +88,17 @@ const renderCurrentWeatherCard = function (currentData) {
   const currentWeatherCard = `<div class="card-body bg-white border mb-2">
     <h2 class="card-title">
         ${currentData.name} ${currentData.date}
-        <img src="https://openweathermap.org/img/w/${currentData.iconCode}.png" />
+        <img src="https://openweathermap.org/img/w/${
+          currentData.iconCode
+        }.png" />
     </h2>
     <p class="card-text">Temp: ${currentData.temperature}&deg;F</p>
     <p class="card-text">Wind: ${currentData.wind} MPH</p>
     <p class="card-text">Humidity: ${currentData.humidity}%</p>
     <p class="card-text">
-        UV index: <span class="btn btn-primary">${currentData.uvi}</span>
+      UV index: <span class="btn ${getUVIClassName(currentData.uvi)}">${
+    currentData.uvi
+  }</span>
     </p>
     </div>`;
 

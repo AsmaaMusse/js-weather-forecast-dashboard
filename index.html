@@ -24,40 +24,45 @@
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">Weather Forecast Dashboard</span>
       </div>
-    </div>  
+    </div>
 
     <main>
       <div class="row gx-0 p-3">
         <!-- Column for search history -->
-        <div class="search-bar col-12 col-md-3 border p-2 mb-3">
+        <div class="col-12 col-md-3 bg-white border p-2 mb-3">
           <h2>Search for a city:</h2>
-          <form class="form-inline active-cyan-4" id="search-form">
+          <form class="form" id="search-form">
             <input
-              class="form-control form-control-sm mr-3 w-75"
+              id="city-input"
+              class="form-control col-12 p-2 my-2"
               type="search"
-              placeholder="Enter city here"
+              placeholder="Search"
               aria-label="Search"
             />
-            <button class="searchBtn" id="search-button">Search</button>
-    
+            <button
+              type="submit"
+              id="search-button"
+              class="btn btn-primary btn-block m-2"
+            >
+              Search
+            </button>
           </form>
 
           <hr />
 
-          <!-- Search history-->
+          <!--city searched lists here-->
           <ul class="col-12 list-group" id="city-list"></ul>
         </div>
 
-          <!-- Column for cards -->
-          <div class="col-12 col-md-9 bg-white border p-2 mb-3">
-            <div class="d-flex flex-column" id="weather-cards-container"></div>
-          </div>
-
+        <!-- Column for cards -->
+        <div class="col-12 col-md-9 bg-white border p-2 mb-3">
+          <div class="d-flex flex-column" id="weather-cards-container"></div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
       integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
