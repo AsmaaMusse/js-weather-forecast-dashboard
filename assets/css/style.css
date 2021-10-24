@@ -13,16 +13,21 @@
   color: var(--main);
 }
 
+.search-text {
+  font-size: 23px;
+}
+
 .search-bar,
-.forecast {
+.cards {
   background-color: whitesmoke;
 }
 
 .searchBtn {
   margin: 10px;
+  border-radius: 5px;
 }
 
-.heading-text {
-  font-size: 30px;
-  font-weight: 500;
+.searchBtn:hover {
+  background-color: rgb(38, 222, 255);
+  color: var(--main);
 }
