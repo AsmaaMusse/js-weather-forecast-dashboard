@@ -1,0 +1,33 @@
+:root {
+  --main: #ffff;
+  --border: #0000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar {
+  font-size: 20px;
+  padding: 30px;
+  color: var(--main);
+}
+
+.search-text {
+  font-size: 23px;
+}
+
+.search-bar,
+.cards {
+  background-color: whitesmoke;
+}
+
+.searchBtn {
+  margin: 10px;
+  border-radius: 5px;
+}
+
+.searchBtn:hover {
+  background-color: rgb(38, 222, 255);
+  color: var(--main);
+}
