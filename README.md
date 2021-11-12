@@ -6,7 +6,7 @@ For this project my aim was to build a weather forecast webpage using OpenWeathe
 
 Deployed Link: https://asmaamusse.github.io/weather-forecast-dashboard/
 
-GitHub page:https://github.com/AsmaaMusse/weather-forecast-dashboard/tree/dev
+GitHub page:https://github.com/AsmaaMusse/weather-forecast-dashboard
 
 ### What did i do?
 
