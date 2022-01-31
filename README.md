@@ -1,4 +1,5 @@
-# weather-dashboard
+# Weather Dashboard ![MIT](https://img.shields.io/static/v1?label=MIT&message=License&color=orange)
+
 
 ## Overview
 
@@ -24,8 +25,14 @@ GitHub page:https://github.com/AsmaaMusse/weather-forecast-dashboard
 
 ## Screenshots:
 
-> Final result
-> ![Website-screenshot.jpg](./assets/images/website.jpg)
+Final result
+![Website-screenshot.jpg](./assets/images/website.jpg)
 
-> Picture of the JS code
-> ![code](./assets/images/code.png)
+ Picture of the JS code
+![code](./assets/images/code.png)
+
+## Contribute
+
+To contribute or ask questions, please <a href="https://mail.google.com/mail/u/0/?tf=cm&to=asmaamusse03@gmail.com&cc&bcc&su&body&fs=1">Email</a> here
+
+
