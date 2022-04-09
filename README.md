@@ -1,9 +1,16 @@
 # Weather Dashboard ![MIT](https://img.shields.io/static/v1?label=MIT&message=License&color=orange)
 
-
 ## Overview
 
 For this project my aim was to build a weather forecast webpage using OpenWeather One Call API.
+
+## Table of contents:
+- [Links](#links)
+- [Technologies Used](#technologies-used)
+- [Screenshots](#screenshots)
+- [Contribute](#contribute)
+
+## Links: 
 
 Deployed Link: https://asmaamusse.github.io/weather-forecast-dashboard/
 
@@ -16,7 +23,7 @@ GitHub page:https://github.com/AsmaaMusse/weather-forecast-dashboard
 - The city search is saved in the LS and displayed onto the website for the user to see
 - The website is also able to validate that the input is not empty.
 
-### Technologies used:
+## Technologies used:
 
 - HTML
 - CSS
